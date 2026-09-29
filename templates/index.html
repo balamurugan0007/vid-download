@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vid Downloader</title>
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/static/icon-192.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    
+    <div class="container glass-panel">
+        <header>
+            <h1>Vid Downloader</h1>
+            <p>Download your favorite videos in premium quality.</p>
+        </header>
+        
+        <main>
+            <div class="input-group">
+                <input type="text" id="url-input" placeholder="Paste YouTube URL here..." value="{{ shared_url }}">
+                <button id="fetch-btn" class="btn-primary">
+                    <span class="btn-text">Fetch Info</span>
+                    <div class="btn-loader hidden"></div>
+                </button>
+            </div>
+            
+            <div id="error-msg" class="hidden error"></div>
+            
+            <div id="video-info" class="hidden">
+                <div class="video-header">
+                    <img id="thumbnail" src="" alt="Video Thumbnail">
+                    <h3 id="video-title"></h3>
+                </div>
+                
+                <div class="format-tabs">
+                    <button class="tab-btn active" data-tab="video-options">Video</button>
+                    <button class="tab-btn" data-tab="audio-options">Audio</button>
+                </div>
+                
+                <div id="video-options" class="options-container active-tab"></div>
+                <div id="audio-options" class="options-container"></div>
+                
+                <div id="progress-container" class="hidden">
+                    <div class="progress-info">
+                        <span id="progress-text">Downloading...</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>
