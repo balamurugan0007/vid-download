@@ -26,18 +26,25 @@ let progressInterval = null;
 let deferredPrompt;
 const installBtn = document.getElementById('install-btn');
 
+// Show the button unconditionally (so users always see the option)
+installBtn.classList.remove('hidden');
+
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    installBtn.classList.remove('hidden');
 });
 
 installBtn.addEventListener('click', async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    deferredPrompt = null;
-    installBtn.classList.add('hidden');
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+            installBtn.classList.add('hidden');
+        }
+        deferredPrompt = null;
+    } else {
+        alert("To install this app:\n1. Click your browser's menu (⋮)\n2. Select 'Install app' or 'Add to Home screen'.\n\n(If you are in Incognito mode, PWA installation is blocked by the browser).");
+    }
 });
 
 window.addEventListener('appinstalled', () => {
